@@ -4,6 +4,25 @@ defmodule Noisy do
   """
   alias VegaLite, as: Vl
 
+  @surroundings_scaling_factor 1
+
+  @doc """
+  Given the {longitude, latitude} of the population_center
+  We generate k near-by locations that are directly associated with
+  the population center.
+
+  The surroundsing_scaling_factor is used to scale how far away the
+  points may be from the population center.
+  """
+  def generate_surroundings(
+        {longitude, latitude},
+        k \\ 5,
+        longitude_scale \\ 1,
+        latitude_scale \\ 2
+      ) do
+    for i <- 1..k, do: {longitude_scale * :rand.normal(), latitude_scale * :rand.normal()}
+  end
+
   @doc """
   Creates a very simple graphic
   """
